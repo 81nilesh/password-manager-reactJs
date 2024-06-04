@@ -16,6 +16,10 @@ const Navbar = () => {
                         <a className='hover:font-bold' href="#">Contact</a>
                     </li>
                 </ul>
+                <button className='text-white bg-green-500 my-5 rounded-full flex justify-between items-center'>
+                    <img className='invert w-10 p-1' src="/icons/icons8-github.svg" alt="github icon" />
+                    <span className='font-bold px-2'>GitHub</span>
+                </button>
             </div>
         </nav>
     );
