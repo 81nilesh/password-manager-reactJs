@@ -47,7 +47,7 @@ const Manager = () => {
                     <div className="flex w-full justify-between gap-9">
                         <input value={form.username} onChange={handleChange} placeholder='Enter User Name' className='rounded-full border border-green-500 w-full p-4 py-1 text-black' type="text" name='username' id='' />
                         <div className="relative">
-                            <input value={form.password} onChange={handleChange} placeholder='Enter Password' className='rounded-full border border-green-500 w-full p-4 py-1 text-black' type="text" name='password' id='' />
+                            <input value={form.password} onChange={handleChange} placeholder='Enter Password' className='rounded-full border border-green-500 w-full p-4 py-1 text-black' type="password" name='password' id='' />
                             <span className='absolute right-[3px] top-[4px] cursor-pointer' onClick={showPassword}>
                                 <img ref={ref} className='p-1' width={29} src="/icons/show.png" alt="eye" />
                             </span>
