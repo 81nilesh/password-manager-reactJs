@@ -4,11 +4,10 @@ const Navbar = () => {
     return (
         <nav className='bg-slate-800 text-white'>
             <div className="mycontainer flex justify-between items-center px-14 py-5  h-12">
-                <div className="logo font-bold">
+                <div className="logo font-bold text-2xl">
                     <span className='text-green-700'> &lt;</span>
-                    PassOP
-                    <span className='text-green-700'>/ &gt;</span>
-
+                    Pass
+                    <span className='text-green-700'>OP/ &gt;</span>
                 </div>
                 <ul>
                     <li className='flex gap-12'>
