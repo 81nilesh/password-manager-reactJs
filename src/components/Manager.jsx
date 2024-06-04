@@ -1,11 +1,28 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Manager = () => {
     const ref = useRef();
+    const [form, setForm] = useState({ site: "", username: "", password: "" });
+    const [passwordArray, setPasswordArray] = useState([])
+
+    useEffect(() => {
+        let passwords = localStorage.getItem("passwords");
+        if (passwords) {
+            setPasswordArray(JSON.parse(passwords));
+        }
+    }, [])
 
     const savePassword = () => {
-
+        console.log(form);
+        setPasswordArray([...passwordArray, form])
+        localStorage.setItem("password", JSON.stringify([...passwordArray, form]))
+        console.log(passwordArray);
     }
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value })
+    }
+
     const showPassword = () => {
         // alert("show the password");
         if (ref.current.src.includes("/icons/hide.png")) {
@@ -13,7 +30,6 @@ const Manager = () => {
         } else {
             ref.current.src = "icons/hide.png"
         }
-
     }
     return (
         <>
@@ -23,15 +39,15 @@ const Manager = () => {
                 <h1 className='text-4xl font-bold text-center'>
                     <span className='text-green-700'> &lt;</span>
                     Pass
-                    <span className='text-green-700'>OP/ &gt;</span>
+                    <span className='text-green-700'>OP/&gt;</span>
                 </h1>
                 <p className='text-green-700 text-lg text-center'>Your Own Password Manager</p>
                 <div className='text-white flex flex-col p-4  gap-8 items-center'>
-                    <input placeholder='Enter Website URL' className='rounded-full border border-green-500 w-full p-4 py-1 text-black' type="text" name='' id='' />
+                    <input value={form.site} onChange={handleChange} placeholder='Enter Website URL' className='rounded-full border border-green-500 w-full p-4 py-1 text-black' type="text" name='site' id='' />
                     <div className="flex w-full justify-between gap-9">
-                        <input placeholder='Enter User Name' className='rounded-full border border-green-500 w-full p-4 py-1 text-black' type="text" name='' id='' />
+                        <input value={form.username} onChange={handleChange} placeholder='Enter User Name' className='rounded-full border border-green-500 w-full p-4 py-1 text-black' type="text" name='username' id='' />
                         <div className="relative">
-                            <input placeholder='Enter Password' className='rounded-full border border-green-500 w-full p-4 py-1 text-black' type="text" name='' id='' />
+                            <input value={form.password} onChange={handleChange} placeholder='Enter Password' className='rounded-full border border-green-500 w-full p-4 py-1 text-black' type="text" name='password' id='' />
                             <span className='absolute right-[3px] top-[4px] cursor-pointer' onClick={showPassword}>
                                 <img ref={ref} className='p-1' width={29} src="/icons/show.png" alt="eye" />
                             </span>
@@ -45,6 +61,38 @@ const Manager = () => {
                         >
                         </lord-icon>
                         Add Password</button>
+                </div>
+                <div className="passwords">
+                    <h2 className='font-bold text-2xl p-5 flex items-center justify-center'>Your Passwords</h2>
+                    {passwordArray.length === 0 && <div>No Passwords to Show</div>}
+                    {passwordArray.length != 0 &&
+                        <table className="table-auto w-full rounded-md overflow-hidden">
+                            <thead className='bg-green-800 text-white'>
+                                <tr>
+                                    <th className='py-2'>Website Url</th>
+                                    <th className='py-2'>Username</th>
+                                    <th className='py-2'>Password</th>
+                                </tr>
+                            </thead>
+                            <tbody className='bg-green-100'>
+                                <tr>
+                                    <td className='py-2 border border-white text-center w-32'>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                                    <td className='py-2 border border-white text-center w-32'>Malcolm Lockyer</td>
+                                    <td className='py-2 border border-white text-center w-32'>1961</td>
+                                </tr>
+                                <tr>
+                                    <td className='py-2 border border-white text-center w-32'>Witchy Woman</td>
+                                    <td className='py-2 border border-white text-center w-32'>The Eagles</td>
+                                    <td className='py-2 border border-white text-center w-32'>1972</td>
+                                </tr>
+                                <tr>
+                                    <td className='py-2 border border-white text-center w-32'>Shining Star</td>
+                                    <td className='py-2 border border-white text-center w-32'>Earth, Wind, and Fire</td>
+                                    <td className='py-2 border border-white text-center w-32'>1975</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
                 </div>
             </div>
         </>

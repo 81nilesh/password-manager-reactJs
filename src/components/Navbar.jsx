@@ -7,7 +7,7 @@ const Navbar = () => {
                 <div className="logo font-bold text-2xl">
                     <span className='text-green-700'> &lt;</span>
                     Pass
-                    <span className='text-green-700'>OP/ &gt;</span>
+                    <span className='text-green-700'>OP/&gt;</span>
                 </div>
                 <ul>
                     <li className='flex gap-12'>
