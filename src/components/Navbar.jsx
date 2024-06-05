@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Navbar = () => {
     return (
         <nav className='bg-slate-800 text-white'>
@@ -19,7 +20,7 @@ const Navbar = () => {
                     </li>
                 </ul> */}
                 <a href="https://github.com/81nilesh">
-                    <button className='text-white bg-green-500 my-5 rounded-full flex justify-between items-center'>
+                    <button className='text-white bg-green-500 my-5 rounded-full flex justify-between items-center ring-white ring-1'>
                         <img className='invert w-10 p-1' src="/icons/icons8-github.svg" alt="github icon" />
                         <span className='font-bold px-2'>GitHub</span>
                     </button>

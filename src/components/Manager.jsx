@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { v4 as uuidv4 } from 'uuid';
 
 const Manager = () => {
     const ref = useRef();
@@ -31,9 +32,19 @@ const Manager = () => {
 
     const savePassword = () => {
         console.log(form);
-        setPasswordArray([...passwordArray, form])
-        localStorage.setItem("password", JSON.stringify([...passwordArray, form]))
+        setPasswordArray([...passwordArray, { ...form, id: uuidv4() }])
+        localStorage.setItem("password", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
         console.log(passwordArray);
+    }
+    const deletePassword = (id) => {
+        console.log("Deleting password with id", id);
+        setPasswordArray(passwordArray.filter(item => item.id !== id));
+        localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item => item.id !== id)))
+    }
+
+    const editPassword = (id) => {
+        console.log("Editing password with id", id);
+
     }
 
     const handleChange = (e) => {
@@ -96,7 +107,7 @@ const Manager = () => {
                             trigger="hover"
                         >
                         </lord-icon>
-                        Add Password</button>
+                        Save Password</button>
                 </div>
                 <div className="passwords">
                     <h2 className='font-bold text-2xl p-5 flex items-center justify-center'>Your Passwords</h2>
@@ -108,6 +119,7 @@ const Manager = () => {
                                     <th className='py-2'>Website Url</th>
                                     <th className='py-2'>Username</th>
                                     <th className='py-2'>Password</th>
+                                    <th className='py-2'>Actions</th>
                                 </tr>
                             </thead>
                             <tbody className='bg-green-100'>
@@ -149,13 +161,29 @@ const Manager = () => {
                                                     </lord-icon>
                                                 </div>
                                             </div></td>
+                                        <td className='py-2 border border-white text-center'>
+                                            <span className='cursor-pointer mx-1' onClick={() => { editPassword(item.id) }}>
+                                                <lord-icon
+                                                    src="https://cdn.lordicon.com/wvdxdmpi.json"
+                                                    trigger="hover"
+                                                    style={{ "width": "25px", "height": "25px" }}>
+                                                </lord-icon>
+                                            </span>
+                                            <span className='cursor-pointer mx-1' onClick={() => { deletePassword(item.id) }} >
+                                                <lord-icon
+                                                    src="https://cdn.lordicon.com/skkahier.json"
+                                                    trigger="hover"
+                                                    style={{ "width": "25px", "height": "25px" }}>
+                                                </lord-icon>
+                                            </span>
+                                        </td>
                                     </tr>
                                 })}
                             </tbody>
                         </table>
                     }
                 </div>
-            </div>
+            </div >
         </>
     );
 }
