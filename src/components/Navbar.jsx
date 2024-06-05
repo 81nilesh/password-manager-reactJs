@@ -5,7 +5,8 @@ const Navbar = () => {
     return (
         <nav className='bg-slate-800 text-white'>
             <div className="mycontainer flex justify-between items-center px-14 py-5  h-12">
-                <div className="logo font-bold text-2xl">
+                <div className="flex  logo font-bold text-2xl">
+                    <img className='mx-4' width={30} src="/fav.png" alt="" />
                     <a href="">
                         <span className='text-green-700'> &lt;</span>
                         Pass

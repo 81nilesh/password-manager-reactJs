@@ -25,7 +25,7 @@ const Manager = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: "dark",
         });
         navigator.clipboard.writeText(text);
     }
@@ -33,20 +33,54 @@ const Manager = () => {
     const savePassword = () => {
         console.log(form);
         setPasswordArray([...passwordArray, { ...form, id: uuidv4() }])
-        setPasswordArray(updatedPasswordArray);
+        // setPasswordArray(updatedPasswordArray);
         localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
-        console.log(passwordArray);
-        setForm({ site: "", username: "", password: "" });
+        setForm({ site: "", username: "", password: "" })
+        toast('Password Saved successfully', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     }
+
     const deletePassword = (id) => {
         console.log("Deleting password with id", id);
-        setPasswordArray(passwordArray.filter(item => item.id !== id));
-        localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item => item.id !== id)))
+        let c = confirm("Do You really want to delete this password?")
+        if (c) {
+            setPasswordArray(passwordArray.filter(item => item.id !== id));
+            localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item => item.id !== id)))
+            toast('Password deleted successfully', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
     }
 
     const editPassword = (id) => {
         console.log("Editing password with id", id);
         setForm(passwordArray.filter(i => i.id === id)[0])
+        setPasswordArray(passwordArray.filter(item => item.id !== id))
+        toast('Password edite', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     }
 
     const handleChange = (e) => {
@@ -59,10 +93,29 @@ const Manager = () => {
         if (ref.current.src.includes("/icons/hide.png")) {
             ref.current.src = "icons/show.png"
             passwordRef.current.type = "password";
+            toast('Hide Password', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         } else {
             ref.current.src = "icons/hide.png"
             passwordRef.current.type = "text";
-
+            toast('Show Password', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     }
     return (
